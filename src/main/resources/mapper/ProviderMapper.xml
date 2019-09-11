@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.cangkusp.dao.ProviderMapper" >
+  <resultMap id="BaseResultMap" type="com.lin.cangkusp.pojo.Provider" >
+    <id column="pno" property="pno" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="paddress" property="paddress" jdbcType="VARCHAR" />
+    <result column="ptel" property="ptel" jdbcType="VARCHAR" />
+    <result column="pcomment" property="pcomment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pno, pname, paddress, ptel, pcomment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lin.cangkusp.pojo.ProviderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from provider
+    where pno = #{pno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from provider
+    where pno = #{pno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lin.cangkusp.pojo.ProviderExample" >
+    delete from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lin.cangkusp.pojo.Provider" >
+    insert into provider (pno, pname, paddress, 
+      ptel, pcomment)
+    values (#{pno,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{paddress,jdbcType=VARCHAR}, 
+      #{ptel,jdbcType=VARCHAR}, #{pcomment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lin.cangkusp.pojo.Provider" >
+    insert into provider
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pno != null" >
+        pno,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="paddress != null" >
+        paddress,
+      </if>
+      <if test="ptel != null" >
+        ptel,
+      </if>
+      <if test="pcomment != null" >
+        pcomment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pno != null" >
+        #{pno,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null" >
+        #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ptel != null" >
+        #{ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomment != null" >
+        #{pcomment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lin.cangkusp.pojo.ProviderExample" resultType="java.lang.Integer" >
+    select count(*) from provider
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update provider
+    <set >
+      <if test="record.pno != null" >
+        pno = #{record.pno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paddress != null" >
+        paddress = #{record.paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptel != null" >
+        ptel = #{record.ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcomment != null" >
+        pcomment = #{record.pcomment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update provider
+    set pno = #{record.pno,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      paddress = #{record.paddress,jdbcType=VARCHAR},
+      ptel = #{record.ptel,jdbcType=VARCHAR},
+      pcomment = #{record.pcomment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lin.cangkusp.pojo.Provider" >
+    update provider
+    <set >
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="paddress != null" >
+        paddress = #{paddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ptel != null" >
+        ptel = #{ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="pcomment != null" >
+        pcomment = #{pcomment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pno = #{pno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lin.cangkusp.pojo.Provider" >
+    update provider
+    set pname = #{pname,jdbcType=VARCHAR},
+      paddress = #{paddress,jdbcType=VARCHAR},
+      ptel = #{ptel,jdbcType=VARCHAR},
+      pcomment = #{pcomment,jdbcType=VARCHAR}
+    where pno = #{pno,jdbcType=VARCHAR}
+  </update>
+</mapper>

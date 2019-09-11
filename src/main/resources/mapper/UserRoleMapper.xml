@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.cangkusp.dao.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.lin.cangkusp.pojo.UserRole" >
+    <id column="urno" property="urno" jdbcType="INTEGER" />
+    <result column="sno" property="sno" jdbcType="INTEGER" />
+    <result column="rno" property="rno" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    urno, sno, rno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lin.cangkusp.pojo.UserRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_role
+    where urno = #{urno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_role
+    where urno = #{urno,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lin.cangkusp.pojo.UserRoleExample" >
+    delete from user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lin.cangkusp.pojo.UserRole" >
+    insert into user_role (urno, sno, rno
+      )
+    values (#{urno,jdbcType=INTEGER}, #{sno,jdbcType=INTEGER}, #{rno,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lin.cangkusp.pojo.UserRole" >
+    insert into user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="urno != null" >
+        urno,
+      </if>
+      <if test="sno != null" >
+        sno,
+      </if>
+      <if test="rno != null" >
+        rno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="urno != null" >
+        #{urno,jdbcType=INTEGER},
+      </if>
+      <if test="sno != null" >
+        #{sno,jdbcType=INTEGER},
+      </if>
+      <if test="rno != null" >
+        #{rno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lin.cangkusp.pojo.UserRoleExample" resultType="java.lang.Integer" >
+    select count(*) from user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_role
+    <set >
+      <if test="record.urno != null" >
+        urno = #{record.urno,jdbcType=INTEGER},
+      </if>
+      <if test="record.sno != null" >
+        sno = #{record.sno,jdbcType=INTEGER},
+      </if>
+      <if test="record.rno != null" >
+        rno = #{record.rno,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_role
+    set urno = #{record.urno,jdbcType=INTEGER},
+      sno = #{record.sno,jdbcType=INTEGER},
+      rno = #{record.rno,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lin.cangkusp.pojo.UserRole" >
+    update user_role
+    <set >
+      <if test="sno != null" >
+        sno = #{sno,jdbcType=INTEGER},
+      </if>
+      <if test="rno != null" >
+        rno = #{rno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where urno = #{urno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lin.cangkusp.pojo.UserRole" >
+    update user_role
+    set sno = #{sno,jdbcType=INTEGER},
+      rno = #{rno,jdbcType=INTEGER}
+    where urno = #{urno,jdbcType=INTEGER}
+  </update>
+</mapper>

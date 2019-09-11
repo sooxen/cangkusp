@@ -1,0 +1,170 @@
+<!--toolbar-->
+<div id="toolbar" class="btn-group">
+    <button id="cargo_add_btn" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+    </button>
+    <button id="cargo_edit_btn" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+    </button>
+    <button id="cargo_delete_btn" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+    </button>
+    <button id="cargo_search_btn" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>查询
+    </button>
+    <button id="cargo_export_btn" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-save" aria-hidden="true"></span>导出Excel
+    </button>
+</div>
+
+<!--add cargo modal-->
+<div class="modal fade" id="cargo_add_modal" tabindex="-1" role="dialog" aria-labelledby="cargo_add_ModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="cargo_add_ModalLabel">新增货物</h4>
+            </div>
+            <div class="modal-body">
+                <form id="cargo_add_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="addCno" class="col-sm-3 control-label">货物编号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cno" id="addCno" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addCname" class="col-sm-3 control-label">货物名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cname" id="addCname" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="addCprice" class="col-sm-3 control-label">单价</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cprice" id="addCprice" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">提供商编号</label>
+                        <div class="col-sm-9">
+                            <select id="addPno" class="form-control" name="pno" title="请选择">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary" id="cargo_add">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--edit cargo modal-->
+<div class="modal fade" id="cargo_edit_modal" tabindex="-1" role="dialog" aria-labelledby="cargo_edit_ModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="cargo_edit_ModalLabel">编辑货物信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="cargo_edit_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="editCno" class="col-sm-3 control-label">货物编号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cno" id="editCno" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCname" class="col-sm-3 control-label">货物名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cname" id="editCname" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editCprice" class="col-sm-3 control-label">单价</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cprice" id="editCprice" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">提供商编号</label>
+                        <div class="col-sm-9">
+                            <select id="editPno" class="form-control" name="pno" title="请选择">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary" id="cargo_edit">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--cargo search modal-->
+<div class="modal fade" id="cargo_search_modal" tabindex="-1" role="dialog" aria-labelledby="cargo_search_ModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title text-center" id="cargo_search_ModalLabel">查找货物</h4>
+            </div>
+            <div class="modal-body">
+                <form id="cargo_search_form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="searchCno" class="col-sm-3 control-label">货物编号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cno" id="searchCno" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchCname" class="col-sm-3 control-label">货物名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="cname" id="searchCname" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">最低单价</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="lowestprice" id="lowestPrice"
+                                   placeholder="最低单价">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">最高单价</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" name="hightestprice" id="hightestPrice"
+                                   placeholder="最高单价">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">提供商编号</label>
+                        <div class="col-sm-9">
+                            <select id="searchPno" class="form-control" name="pno">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3">
+                            <button type="reset" style="margin-left: 15px" class="btn btn-success">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                <button type="button" class="btn btn-primary" id="cargo_search">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="cargo_show">
+
+</table>

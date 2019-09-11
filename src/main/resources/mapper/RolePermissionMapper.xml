@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.cangkusp.dao.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.lin.cangkusp.pojo.RolePermission" >
+    <id column="rpno" property="rpno" jdbcType="INTEGER" />
+    <result column="rno" property="rno" jdbcType="INTEGER" />
+    <result column="perno" property="perno" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rpno, rno, perno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lin.cangkusp.pojo.RolePermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from role_permission
+    where rpno = #{rpno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from role_permission
+    where rpno = #{rpno,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lin.cangkusp.pojo.RolePermissionExample" >
+    delete from role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lin.cangkusp.pojo.RolePermission" >
+    insert into role_permission (rpno, rno, perno
+      )
+    values (#{rpno,jdbcType=INTEGER}, #{rno,jdbcType=INTEGER}, #{perno,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lin.cangkusp.pojo.RolePermission" >
+    insert into role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rpno != null" >
+        rpno,
+      </if>
+      <if test="rno != null" >
+        rno,
+      </if>
+      <if test="perno != null" >
+        perno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rpno != null" >
+        #{rpno,jdbcType=INTEGER},
+      </if>
+      <if test="rno != null" >
+        #{rno,jdbcType=INTEGER},
+      </if>
+      <if test="perno != null" >
+        #{perno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lin.cangkusp.pojo.RolePermissionExample" resultType="java.lang.Integer" >
+    select count(*) from role_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update role_permission
+    <set >
+      <if test="record.rpno != null" >
+        rpno = #{record.rpno,jdbcType=INTEGER},
+      </if>
+      <if test="record.rno != null" >
+        rno = #{record.rno,jdbcType=INTEGER},
+      </if>
+      <if test="record.perno != null" >
+        perno = #{record.perno,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update role_permission
+    set rpno = #{record.rpno,jdbcType=INTEGER},
+      rno = #{record.rno,jdbcType=INTEGER},
+      perno = #{record.perno,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lin.cangkusp.pojo.RolePermission" >
+    update role_permission
+    <set >
+      <if test="rno != null" >
+        rno = #{rno,jdbcType=INTEGER},
+      </if>
+      <if test="perno != null" >
+        perno = #{perno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rpno = #{rpno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lin.cangkusp.pojo.RolePermission" >
+    update role_permission
+    set rno = #{rno,jdbcType=INTEGER},
+      perno = #{perno,jdbcType=INTEGER}
+    where rpno = #{rpno,jdbcType=INTEGER}
+  </update>
+</mapper>

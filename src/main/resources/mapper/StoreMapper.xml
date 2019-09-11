@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lin.cangkusp.dao.StoreMapper" >
+  <resultMap id="BaseResultMap" type="com.lin.cangkusp.pojo.Store" >
+    <id column="stno" property="stno" jdbcType="VARCHAR" />
+    <result column="cno" property="cno" jdbcType="VARCHAR" />
+    <result column="wno" property="wno" jdbcType="VARCHAR" />
+    <result column="stnum" property="stnum" jdbcType="INTEGER" />
+    <result column="stdate" property="stdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stno, cno, wno, stnum, stdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lin.cangkusp.pojo.StoreExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from store
+    where stno = #{stno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from store
+    where stno = #{stno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.lin.cangkusp.pojo.StoreExample" >
+    delete from store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.lin.cangkusp.pojo.Store" >
+    insert into store (stno, cno, wno, 
+      stnum, stdate)
+    values (#{stno,jdbcType=VARCHAR}, #{cno,jdbcType=VARCHAR}, #{wno,jdbcType=VARCHAR}, 
+      #{stnum,jdbcType=INTEGER}, #{stdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lin.cangkusp.pojo.Store" >
+    insert into store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stno != null" >
+        stno,
+      </if>
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="wno != null" >
+        wno,
+      </if>
+      <if test="stnum != null" >
+        stnum,
+      </if>
+      <if test="stdate != null" >
+        stdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stno != null" >
+        #{stno,jdbcType=VARCHAR},
+      </if>
+      <if test="cno != null" >
+        #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="wno != null" >
+        #{wno,jdbcType=VARCHAR},
+      </if>
+      <if test="stnum != null" >
+        #{stnum,jdbcType=INTEGER},
+      </if>
+      <if test="stdate != null" >
+        #{stdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.lin.cangkusp.pojo.StoreExample" resultType="java.lang.Integer" >
+    select count(*) from store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update store
+    <set >
+      <if test="record.stno != null" >
+        stno = #{record.stno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cno != null" >
+        cno = #{record.cno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wno != null" >
+        wno = #{record.wno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stnum != null" >
+        stnum = #{record.stnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.stdate != null" >
+        stdate = #{record.stdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update store
+    set stno = #{record.stno,jdbcType=VARCHAR},
+      cno = #{record.cno,jdbcType=VARCHAR},
+      wno = #{record.wno,jdbcType=VARCHAR},
+      stnum = #{record.stnum,jdbcType=INTEGER},
+      stdate = #{record.stdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lin.cangkusp.pojo.Store" >
+    update store
+    <set >
+      <if test="cno != null" >
+        cno = #{cno,jdbcType=VARCHAR},
+      </if>
+      <if test="wno != null" >
+        wno = #{wno,jdbcType=VARCHAR},
+      </if>
+      <if test="stnum != null" >
+        stnum = #{stnum,jdbcType=INTEGER},
+      </if>
+      <if test="stdate != null" >
+        stdate = #{stdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where stno = #{stno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lin.cangkusp.pojo.Store" >
+    update store
+    set cno = #{cno,jdbcType=VARCHAR},
+      wno = #{wno,jdbcType=VARCHAR},
+      stnum = #{stnum,jdbcType=INTEGER},
+      stdate = #{stdate,jdbcType=TIMESTAMP}
+    where stno = #{stno,jdbcType=VARCHAR}
+  </update>
+</mapper>
